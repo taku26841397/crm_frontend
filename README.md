@@ -1,36 +1,147 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CRM Frontend
 
-## Getting Started
+顧客管理システム（CRM）のフロントエンドアプリケーションです。
 
-First, run the development server:
+Next.js と TypeScript を使用して開発し、バックエンドの Django REST Framework API と連携しています。
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+# 概要
+
+営業活動や顧客対応を管理するためのCRMシステムです。
+
+顧客情報の管理、対応履歴の記録、ダッシュボードによる状況把握を行えます。
+
+---
+
+# 使用技術
+
+## Frontend
+
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+- TanStack Query (React Query)
+
+## API
+
+- Django REST Framework
+
+---
+
+# 主な機能
+
+## 認証
+
+- ログイン
+- Token認証
+- ログアウト
+
+## 顧客管理
+
+- 顧客一覧表示
+- 顧客作成
+- 顧客詳細表示
+- 顧客編集
+- 顧客削除
+
+## 対応履歴管理
+
+- 対応履歴作成
+- 対応履歴一覧表示
+- 対応履歴編集
+- 対応履歴削除
+
+## 次回アクション管理
+
+- 次回アクション設定
+- 実施予定日設定
+- 実施予定日更新
+
+## ダッシュボード
+
+- 顧客総数表示
+- 新規顧客数表示
+- 対応中顧客数表示
+- 成約顧客数表示
+- グラフ表示
+
+## 一覧機能
+
+- 検索
+- ステータス絞り込み
+- ソート
+- ページネーション
+
+---
+
+# 工夫したポイント
+
+## 認証管理
+
+Token Authenticationを使用し、ログインユーザーのみが利用できる構成にしました。
+
+## API通信
+
+共通の認証ヘッダーを作成し、各API通信で再利用しています。
+
+```typescript
+export const authHeaders = () => {
+  const token = localStorage.getItem("crm_token");
+
+  return {
+    Authorization: `Token ${token}`,
+  };
+};
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## データ取得
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+TanStack Query を利用し、
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- キャッシュ管理
+- ローディング管理
+- 再取得制御
 
-## Learn More
+を実装しています。
 
-To learn more about Next.js, take a look at the following resources:
+## 環境別設定
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+開発環境と本番環境を分離するため、
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```env
+NEXT_PUBLIC_API_URL=
+```
 
-## Deploy on Vercel
+を利用してAPIエンドポイントを管理しています。
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# 画面一覧
+
+- ログイン
+- ダッシュボード
+- 顧客一覧
+- 顧客詳細
+- 顧客作成
+- 顧客編集
+- 対応履歴一覧
+- 対応履歴作成
+- 対応履歴編集
+
+---
+
+# 今後の改善予定
+
+- Vercelへのデプロイ
+- レスポンシブ対応改善
+- UI/UX改善
+- エラーハンドリング強化
+- テストコード追加
+
+---
+
+# Backend
+
+本システムは Django REST Framework を利用したバックエンドAPIと連携して動作します。
