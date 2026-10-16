@@ -12,6 +12,8 @@ import Sidebar from "../../components/Sidebar";
 import { getdiffDays, getDateColor } from "@/src/lib/date";
 import { authHeaders } from "@/src/lib/api";
 
+import { keepPreviousData } from "@tanstack/react-query";
+
 
 
 
@@ -59,7 +61,7 @@ export default function CustomerListPage() {
     const { data, isLoading } = useQuery({
         queryKey: ["customers", query, status, sort, page],
         queryFn: () => fetchCustomers({ query, status, sort, page }),
-        keepPreviousData: true,
+        placeholderData: keepPreviousData,
     });
 
     const statusColor: any = {

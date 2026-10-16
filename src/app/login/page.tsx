@@ -10,7 +10,7 @@ export default function LoginPage() {
     const [password, setPassword] = useState("");
     const [error, setError] = useState("")
 
-
+    console.log(process.env.NEXT_PUBLIC_API_URL)
     const handleLogin = async (
         e: React.FormEvent
     ) => {
