@@ -18,10 +18,29 @@ import { authHeaders } from "@/src/lib/api";
 
 import { keepPreviousData } from "@tanstack/react-query";
 
+import { Suspense } from "react";
 
 
+function CreatedMessage() {
+    const searchParams = useSearchParams();
+    const created = searchParams.get("created");
 
+    return (
+        <>
+            {created === "true" && (
+                <div className="bg-green-100 text-green-700 p-3 rounded mb-4">
+                    ✅ 顧客を登録しました
+                </div>
+            )}
 
+            {created === "false" && (
+                <div className="bg-green-100 text-red-700 p-3 rounded mb-4">
+                    顧客を削除しました
+                </div>
+            )}
+        </>
+    );
+}
 
 
 
@@ -74,9 +93,6 @@ export default function CustomerListPage() {
         in_progress: "bg-yellow-100 text-yellow-700",
         closed: "bg-green-100 text-green-700",
     };
-    const created = useSearchParams().get("created")
-
-
 
 
     return (
@@ -133,9 +149,11 @@ export default function CustomerListPage() {
                 </div>
 
 
-
-                {created === "true" && (<div className="bg-green-100 text-green-700 p-3 rounded mb-4"> ✅ 顧客を登録しました </div>)}
-                {created === "false" && (<div className="bg-green-100 text-red-700 p-3 rounded mb-4">  顧客を削除しました </div>)}
+                <Suspense fallback={null}>
+                    <CreatedMessage />
+                </Suspense>
+                {/* {created === "true" && (<div className="bg-green-100 text-green-700 p-3 rounded mb-4"> ✅ 顧客を登録しました </div>)}
+                {created === "false" && (<div className="bg-green-100 text-red-700 p-3 rounded mb-4">  顧客を削除しました </div>)} */}
                 {/* 検索・フィルタ */}
                 <div className="flex gap-3 mb-6">
                     <input
