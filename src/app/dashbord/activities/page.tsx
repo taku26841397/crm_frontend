@@ -1,16 +1,30 @@
+"use client";
+
+
+import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import Sidebar from "@/src/components/Sidebar";
+import { authHeaders } from "@/src/lib/api";
 
-export default async function ActivityDashbordPage({
-    params,
-}: {
-    params: Promise<{ id: string }>;
-}) {
-    const activitiesRes = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/activities/`
+
+const fetchActivities = async () => {
+    const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/activities/`,
+        {
+            headers: authHeaders(),
+        }
     );
 
-    const activities = await activitiesRes.json();
+    return res.json();
+};
+
+export default function ActivityDashbordPage() {
+
+
+    const { data } = useQuery({
+        queryKey: ["activities"],
+        queryFn: fetchActivities,
+    });
 
     return (
         <div className="flex min-h-screen bg-gray-100">
@@ -51,7 +65,7 @@ export default async function ActivityDashbordPage({
 
                         <tbody>
 
-                            {activities?.results?.map((activity: any) => (
+                            {data?.results?.map((activity: any) => (
 
                                 <tr
                                     key={activity.id}
