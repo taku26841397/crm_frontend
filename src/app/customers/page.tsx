@@ -1,5 +1,9 @@
 "use client";
 
+export const dynamic = "force-dynamic";
+
+
+
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
@@ -13,6 +17,7 @@ import { getdiffDays, getDateColor } from "@/src/lib/date";
 import { authHeaders } from "@/src/lib/api";
 
 import { keepPreviousData } from "@tanstack/react-query";
+
 
 
 
