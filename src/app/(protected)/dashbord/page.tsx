@@ -4,7 +4,7 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link"
-import Sidebar from "../../components/Sidebar";
+import Sidebar from "@/src/components/Sidebar";
 import { useRouter } from "next/navigation";
 
 import { authHeaders } from "@/src/lib/api";
@@ -23,6 +23,8 @@ import {
     Clock3,
     CircleCheck,
 } from "lucide-react";
+
+// import { useAuthGuard } from "../hooks/useAuthGuard";
 
 
 
@@ -68,6 +70,8 @@ export default function CustomerDashbordPage() {
         queryKey: ["customers"],
         queryFn: fetchCustomers,
     });
+
+
 
     if (isLoading) {
         return (

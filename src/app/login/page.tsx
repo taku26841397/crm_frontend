@@ -19,7 +19,7 @@ export default function LoginPage() {
         setError("")
 
         const res = await fetch(
-            `${process.env.NEXT_PUBLIC_API_URL}/auth/login/`,
+            `${process.env.NEXT_PUBLIC_API_URL}/auth/login`,
             {
                 method: "POST",
                 headers: {
@@ -34,6 +34,9 @@ export default function LoginPage() {
         );
 
         const data = await res.json();
+
+        console.log("status", res.status);
+        console.log("data", data);
 
         if (res.ok) {
             localStorage.setItem(

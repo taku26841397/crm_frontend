@@ -7,6 +7,8 @@ import Sidebar from "@/src/components/Sidebar";
 import { authHeaders } from "@/src/lib/api";
 
 
+
+
 const fetchActivities = async () => {
     const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/activities/`,
@@ -25,6 +27,8 @@ export default function ActivityDashbordPage() {
         queryKey: ["activities"],
         queryFn: fetchActivities,
     });
+
+
 
     return (
         <div className="flex min-h-screen bg-gray-100">

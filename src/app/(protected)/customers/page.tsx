@@ -12,7 +12,7 @@ import { useQuery } from "@tanstack/react-query";
 import { ChevronRight } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link"
-import Sidebar from "../../components/Sidebar";
+import Sidebar from "../../../components/Sidebar";
 import { getdiffDays, getDateColor } from "@/src/lib/date";
 import { authHeaders } from "@/src/lib/api";
 
