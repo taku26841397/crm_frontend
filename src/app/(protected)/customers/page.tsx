@@ -71,14 +71,14 @@ export default function CustomerListPage() {
 
     const router = useRouter();
 
-    useEffect(() => {
-        const token =
-            localStorage.getItem("crm_token");
+    // useEffect(() => {
+    //     const token =
+    //         localStorage.getItem("crm_token");
 
-        if (!token) {
-            router.push("/login");
-        }
-    }, []);
+    //     if (!token) {
+    //         router.push("/login");
+    //     }
+    // }, []);
 
 
 
