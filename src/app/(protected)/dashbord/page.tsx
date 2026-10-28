@@ -81,6 +81,23 @@ export default function CustomerDashbordPage() {
         );
     }
 
+    const recentCustomers =
+        customers?.results?.filter(
+            (customer: any) => {
+                const createdAt = new Date(
+                    customer.created_at
+                );
+
+                const threeDaysAgo = new Date();
+
+                threeDaysAgo.setDate(
+                    threeDaysAgo.getDate() - 3
+                );
+
+                return createdAt >= threeDaysAgo;
+            }
+        ) ?? [];
+
 
 
     const chartData = [
@@ -105,41 +122,38 @@ export default function CustomerDashbordPage() {
     ];
 
     return (
-        <div className="flex min-h-screen bg-slate-50">
 
-            <Sidebar />
 
+        <main className="flex-1 pt-20 px-8 pb-8 md:p-8 md:pt-8 border-l border-slate-200">
             {/* メインエリア */}
-            <main className="flex-1 pt-20 px-8 pb-8 md:p-8 md:pt-8 border-l border-slate-200">
-
-                <h1 className="text-4xl font-semibold tracking-tight">
-                    ダッシュボード
-                </h1>
+            <h1 className="text-4xl font-semibold tracking-tight">
+                ダッシュボード
+            </h1>
 
 
 
-                {/* KPIカード */}
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-5 sm:grid-cols-2 xl:grid-cols-4 ">
+            {/* KPIカード */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-5 sm:grid-cols-2 xl:grid-cols-4 ">
 
-                    <div className="bg-white rounded-2xl shadow p-4 border-slate-100 hover:shadow-md hover:-translate-y-1 transition">
+                <div className="bg-white rounded-2xl shadow p-4 border-slate-100 hover:shadow-md hover:-translate-y-1 transition">
 
-                        <div className="flex justify-between">
+                    <div className="flex justify-between">
 
-                            <div>
-                                <p className="text-slate-500 text-sm font-medium">
-                                    総顧客数
-                                </p>
+                        <div>
+                            <p className="text-slate-500 text-sm font-medium">
+                                総顧客数
+                            </p>
 
-                                <p className="text-5xl font-bold tracking-tight text-black mt-2">
-                                    {dashboard?.total}
-                                </p>
-                                <p className="text-xs text-green-500 mt-1">
-                                    前月比 +12
-                                </p>
-                            </div>
+                            <p className="text-5xl font-bold tracking-tight text-black mt-2">
+                                {dashboard?.total}
+                            </p>
+                            <p className="text-xs text-green-500 mt-1">
+                                前月比 +12
+                            </p>
+                        </div>
 
-                            <div
-                                className="
+                        <div
+                            className="
                                         w-12 h-12
                                         rounded-xl
                                         bg-blue-100
@@ -147,116 +161,117 @@ export default function CustomerDashbordPage() {
                                         items-center
                                         justify-center
                                     "
-                            >
-                                <Users
-                                    className="text-blue-600"
-                                    size={24}
-                                />
-                            </div>
-
+                        >
+                            <Users
+                                className="text-blue-600"
+                                size={24}
+                            />
                         </div>
 
                     </div>
 
-                    <div className="bg-white rounded-2xl shadow-sm p-4 border border-slate-100 hover:shadow-md hover:-translate-y-1 transition">
-                        <div className="flex justify-between">
-                            <div>
-                                <p className="text-slate-500 text-sm font-medium">
-                                    新規
-                                </p>
+                </div>
 
-                                <p className="text-5xl tracking-tight font-bold text-blue-500 mt-2">
-                                    {dashboard?.new}
-                                </p>
-                                <p className="text-xs text-blue-500 mt-1">
-                                    前月比 +12
-                                </p>
-                            </div>
-                            <div className="w-12 h-12
+                <div className="bg-white rounded-2xl shadow-sm p-4 border border-slate-100 hover:shadow-md hover:-translate-y-1 transition">
+                    <div className="flex justify-between">
+                        <div>
+                            <p className="text-slate-500 text-sm font-medium">
+                                新規
+                            </p>
+
+                            <p className="text-5xl tracking-tight font-bold text-blue-500 mt-2">
+                                {dashboard?.new}
+                            </p>
+                            <p className="text-xs text-blue-500 mt-1">
+                                前月比 +12
+                            </p>
+                        </div>
+                        <div className="w-12 h-12
                                         rounded-xl
                                         bg-blue-100
                                         flex
                                         items-center
                                         justify-center">
-                                <UserPlus
-                                    className="text-blue-400"
-                                    size={24}
-                                />
-                            </div>
+                            <UserPlus
+                                className="text-blue-400"
+                                size={24}
+                            />
                         </div>
-
                     </div>
 
-                    <div className="bg-white rounded-2xl shadow-sm p-4 border border-slate-100 hover:shadow-md hover:-translate-y-1 transition">
-                        <div className="flex justify-between">
-                            <div>
-                                <p className="text-slate-500 text-sm font-medium">
-                                    対応中
-                                </p>
+                </div>
 
-                                <p className="text-5xl tracking-tight font-bold text-yellow-500 mt-2">
-                                    {dashboard?.in_progress}
-                                </p>
-                                <p className="text-xs text-green-500 mt-1">
-                                    前月比 +12
-                                </p>
-                            </div>
-                            <div className="w-12 h-12
+                <div className="bg-white rounded-2xl shadow-sm p-4 border border-slate-100 hover:shadow-md hover:-translate-y-1 transition">
+                    <div className="flex justify-between">
+                        <div>
+                            <p className="text-slate-500 text-sm font-medium">
+                                対応中
+                            </p>
+
+                            <p className="text-5xl tracking-tight font-bold text-yellow-500 mt-2">
+                                {dashboard?.in_progress}
+                            </p>
+                            <p className="text-xs text-green-500 mt-1">
+                                前月比 +12
+                            </p>
+                        </div>
+                        <div className="w-12 h-12
                                         rounded-xl
                                         bg-yellow-100
                                         flex
                                         items-center
                                         justify-center">
-                                <Clock3
-                                    className="text-yellow-400"
-                                    size={24}
-                                />
-                            </div>
+                            <Clock3
+                                className="text-yellow-400"
+                                size={24}
+                            />
                         </div>
                     </div>
-                    <div className="bg-white rounded-2xl shadow-sm p-4 border border-slate-100 hover:shadow-md hover:-translate-y-1 transition">
-                        <div className="flex justify-between">
-                            <div>
-                                <p className="text-slate-500 text-sm font-medium">
-                                    成約
-                                </p>
+                </div>
+                <div className="bg-white rounded-2xl shadow-sm p-4 border border-slate-100 hover:shadow-md hover:-translate-y-1 transition">
+                    <div className="flex justify-between">
+                        <div>
+                            <p className="text-slate-500 text-sm font-medium">
+                                成約
+                            </p>
 
-                                <p className="text-5xl tracking-tight font-bold text-green-500 mt-2">
-                                    {dashboard?.closed}
-                                </p>
-                                <p className="text-xs text-green-500 mt-1">
-                                    前月比 +12
-                                </p>
-                            </div>
-                            <div className="w-12 h-12
+                            <p className="text-5xl tracking-tight font-bold text-green-500 mt-2">
+                                {dashboard?.closed}
+                            </p>
+                            <p className="text-xs text-green-500 mt-1">
+                                前月比 +12
+                            </p>
+                        </div>
+                        <div className="w-12 h-12
                                         rounded-xl
                                         bg-green-100
                                         flex
                                         items-center
                                         justify-center">
-                                <CircleCheck
-                                    className="text-green-400 "
-                                    size={24}
-                                />
-                            </div>
+                            <CircleCheck
+                                className="text-green-400 "
+                                size={24}
+                            />
                         </div>
                     </div>
-
                 </div>
-                <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 mt-4">
 
-                    {/* 最近の顧客 */}
-                    <div className="bg-white rounded-2xl shadow-sm lg:col-span-3">
-                        <div className="flex justify-between items-center px-4 py-3">
-                            <h2 className="text-lg font-semibold text-slate-900">
-                                最近の顧客
-                                <span className="ml-2 text-sm text-slate-400">
-                                    ({customers?.results?.length ?? 0})
-                                </span>
-                            </h2>
-                            <Link
-                                href="/customers"
-                                className="
+            </div>
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 mt-4">
+
+                {/* 最近の顧客 */}
+                <div className="bg-white rounded-2xl shadow-sm lg:col-span-3">
+                    <div className="flex justify-between items-center px-4 py-3">
+                        <h2 className="text-lg font-semibold text-slate-900">
+                            最近の顧客
+                            <span className="ml-2 text-sm text-slate-400">
+                                {/* ({customers?.results?.length ?? 0}) */}
+                                ({recentCustomers.length})
+                            </span>
+                        </h2>
+                        <Link
+                            href="/customers"
+                            className="
         text-sm
         font-medium
         text-slate-600
@@ -266,53 +281,52 @@ export default function CustomerDashbordPage() {
         hover:bg-slate-100
         transition
     "
-                            >
-                                すべて表示 →
-                            </Link>
-                        </div>
-                        <table className="w-full">
+                        >
+                            すべて表示 →
+                        </Link>
+                    </div>
+                    <table className="w-full">
 
-                            <thead>
-                                <tr className="border-b border-gray-300 text-xs font-medium text-slate-500 uppercase tracking-wide">
+                        <thead>
+                            <tr className="border-b border-gray-300 text-xs font-medium text-slate-500 uppercase tracking-wide">
 
-                                    <th className="text-left px-4 py-3">
-                                        顧客名
-                                    </th>
+                                <th className="text-left px-4 py-3">
+                                    顧客名
+                                </th>
 
-                                    <th className="text-left px-4 py-3">
-                                        会社名
-                                    </th>
+                                <th className="text-left px-4 py-3">
+                                    会社名
+                                </th>
 
-                                    <th className="text-left px-4 py-3">
-                                        ステータス
-                                    </th>
+                                <th className="text-left px-4 py-3">
+                                    ステータス
+                                </th>
 
-                                    <th className="text-left px-4 py-3">
-                                        最終更新
-                                    </th>
+                                <th className="text-left px-4 py-3">
+                                    最終更新
+                                </th>
 
 
 
-                                </tr>
-                            </thead>
+                            </tr>
+                        </thead>
 
-                            <tbody className="text-sm">
+                        <tbody className="text-sm">
 
-                                {customers?.results
-                                    ?.slice(0, 5)
-                                    .map((customer: any) => (
+                            {recentCustomers.slice(0, 5)
+                                .map((customer: any) => (
 
-                                        <tr
-                                            key={customer.id}
-                                            className="border-b border-gray-100 hover:bg-blue-50 cursor-pointer transition"
-                                            onClick={() => router.push(`/customers/${customer.id}`)}
-                                        >
-                                            <td className="px-4 py-3 font-semibold">
+                                    <tr
+                                        key={customer.id}
+                                        className="border-b border-gray-100 hover:bg-blue-50 cursor-pointer transition"
+                                        onClick={() => router.push(`/customers/${customer.id}`)}
+                                    >
+                                        <td className="px-4 py-3 font-semibold">
 
-                                                <div className="flex items-center gap-3">
+                                            <div className="flex items-center gap-3">
 
-                                                    <div
-                                                        className="
+                                                <div
+                                                    className="
                 w-8 h-8
                 rounded-full
                 bg-blue-500
@@ -320,117 +334,117 @@ export default function CustomerDashbordPage() {
                 flex items-center justify-center
                 text-xs font-bold
             "
-                                                    >
-                                                        {customer.name.slice(0, 1)}
-                                                    </div>
-
-                                                    {customer.name}
-
+                                                >
+                                                    {customer.name.slice(0, 1)}
                                                 </div>
 
-                                            </td>
+                                                {customer.name}
+
+                                            </div>
+
+                                        </td>
 
 
-                                            <td className="px-4 py-3 text-gray-600">
-                                                {customer.company}
-                                            </td>
+                                        <td className="px-4 py-3 text-gray-600">
+                                            {customer.company}
+                                        </td>
 
-                                            <td className="px-4 py-3 flex justify-center">
+                                        <td className="px-4 py-3 flex justify-center">
 
-                                                <span
-                                                    className={
-                                                        customer.status === "new"
-                                                            ? "bg-blue-100 text-blue-700 px-2 py-1 rounded-full text-xs"
-                                                            : customer.status === "in_progress"
-                                                                ? "bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full text-xs"
-                                                                : "bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs"
-                                                    }
-                                                >
-                                                    {customer.status === "new" && "新規"}
-                                                    {customer.status === "in_progress" && "対応中"}
-                                                    {customer.status === "closed" && "成約"}
-                                                </span>
+                                            <span
+                                                className={
+                                                    customer.status === "new"
+                                                        ? "bg-blue-100 text-blue-700 px-2 py-1 rounded-full text-xs"
+                                                        : customer.status === "in_progress"
+                                                            ? "bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full text-xs"
+                                                            : "bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs"
+                                                }
+                                            >
+                                                {customer.status === "new" && "新規"}
+                                                {customer.status === "in_progress" && "対応中"}
+                                                {customer.status === "closed" && "成約"}
+                                            </span>
 
-                                            </td>
-                                            <td className="px-4 py-3 text-gray-500">
-                                                {new Date(
-                                                    customer.created_at
-                                                ).toLocaleString(
-                                                    "ja-JP",
-                                                    {
-                                                        year: "numeric",
-                                                        month: "2-digit",
-                                                        day: "2-digit",
-                                                        hour: "2-digit",
-                                                        minute: "2-digit",
-                                                    }
-                                                )}
-                                            </td>
+                                        </td>
+                                        <td className="px-4 py-3 text-gray-500">
+                                            {new Date(
+                                                customer.created_at
+                                            ).toLocaleString(
+                                                "ja-JP",
+                                                {
+                                                    year: "numeric",
+                                                    month: "2-digit",
+                                                    day: "2-digit",
+                                                    hour: "2-digit",
+                                                    minute: "2-digit",
+                                                }
+                                            )}
+                                        </td>
 
-                                        </tr>
+                                    </tr>
 
 
-                                    ))}
+                                ))}
 
-                            </tbody>
+                        </tbody>
 
-                        </table>
+                    </table>
 
-                    </div>
+                </div>
 
-                    {/* 右側の空きエリア */}
-                    <div className="bg-white rounded-2xl shadow p-6 lg:col-span-2">
+                {/* 右側の空きエリア */}
+                <div className="bg-white rounded-2xl shadow p-6 lg:col-span-2">
 
-                        <h2 className="text-xl font-bold mb-4">
-                            ステータス別顧客数
-                        </h2>
-                        <p className="text-sm text-gray-500">
-                            顧客ステータスの割合
-                        </p>
+                    <h2 className="text-xl font-bold mb-4">
+                        ステータス別顧客数
+                    </h2>
+                    <p className="text-sm text-gray-500">
+                        顧客ステータスの割合
+                    </p>
 
+
+                    {/* グラフ */}
+                    <div className="grid grid-cols-3 gap-2 items-center">
 
                         {/* グラフ */}
-                        <div className="grid grid-cols-3 gap-2 items-center">
+                        <div className="col-span-2 relative h-72">
 
-                            {/* グラフ */}
-                            <div className="col-span-2 relative h-72">
+                            <ResponsiveContainer
+                                width="100%"
+                                height="100%"
+                            >
 
-                                <ResponsiveContainer
-                                    width="100%"
-                                    height="100%"
-                                >
+                                <PieChart>
 
-                                    <PieChart>
+                                    <Pie
+                                        data={chartData}
+                                        dataKey="value"
+                                        nameKey="name"
+                                        cx="50%"
+                                        cy="50%"
+                                        innerRadius={65}
+                                        outerRadius={100}
+                                    >
 
-                                        <Pie
-                                            data={chartData}
-                                            dataKey="value"
-                                            nameKey="name"
-                                            cx="50%"
-                                            cy="50%"
-                                            innerRadius={65}
-                                            outerRadius={100}
-                                        >
+                                        {chartData.map((entry, index) => (
 
-                                            {chartData.map((entry, index) => (
+                                            <Cell
+                                                key={index}
+                                                fill={COLORS[index]}
+                                            />
 
-                                                <Cell
-                                                    key={index}
-                                                    fill={COLORS[index]}
-                                                />
+                                        ))}
 
-                                            ))}
+                                    </Pie>
 
-                                        </Pie>
+                                    <Tooltip />
 
-                                        <Tooltip />
+                                </PieChart>
 
-                                    </PieChart>
+                            </ResponsiveContainer>
 
-                                </ResponsiveContainer>
-
-                                <div
-                                    className="
+                            <div
+                                className="
                 absolute
                 inset-0
                 flex
@@ -439,131 +453,131 @@ export default function CustomerDashbordPage() {
                 justify-center
                 pointer-events-none
             "
-                                >
-                                    <p className="text-sm text-gray-500">
-                                        合計
-                                    </p>
+                            >
+                                <p className="text-sm text-gray-500">
+                                    合計
+                                </p>
 
-                                    <p className="text-3xl font-bold">
-                                        {dashboard?.total}
-                                    </p>
+                                <p className="text-3xl font-bold">
+                                    {dashboard?.total}
+                                </p>
 
-                                    <p className="text-xs text-gray-400">
-                                        顧客
-                                    </p>
-
-                                </div>
-
-                            </div>
-
-                            {/* 凡例 */}
-                            <div className="space-y-5">
-
-                                <div>
-
-                                    <div className="flex items-center gap-2">
-
-                                        <div className="w-3 h-3 rounded-full bg-blue-500" />
-
-                                        <span className="font-medium text-sm">
-                                            新規
-                                        </span>
-
-                                    </div>
-
-                                    <p className="ml-5 text-sm text-gray-600">
-
-                                        {dashboard?.new}人
-
-                                        {" "}
-
-                                        (
-                                        {(
-                                            (
-                                                dashboard?.new /
-                                                dashboard?.total
-                                            ) * 100
-                                        ).toFixed(1)}
-                                        %)
-
-                                    </p>
-
-                                </div>
-
-                                <div>
-
-                                    <div className="flex items-center gap-2">
-
-                                        <div className="w-3 h-3 rounded-full bg-yellow-500" />
-
-                                        <span className="font-medium text-sm">
-                                            対応中
-                                        </span>
-
-                                    </div>
-
-                                    <p className="ml-5 text-sm text-gray-600">
-
-                                        {dashboard?.in_progress}人
-
-                                        {" "}
-
-                                        (
-                                        {(
-                                            (
-                                                dashboard?.in_progress /
-                                                dashboard?.total
-                                            ) * 100
-                                        ).toFixed(1)}
-                                        %)
-
-                                    </p>
-
-                                </div>
-
-                                <div>
-
-                                    <div className="flex items-center gap-2">
-
-                                        <div className="w-3 h-3 rounded-full bg-green-500" />
-
-                                        <span className="font-medium text-sm">
-                                            成約
-                                        </span>
-
-                                    </div>
-
-                                    <p className="ml-5 text-sm text-gray-600">
-
-                                        {dashboard?.closed}人
-
-                                        {" "}
-
-                                        (
-                                        {(
-                                            (
-                                                dashboard?.closed /
-                                                dashboard?.total
-                                            ) * 100
-                                        ).toFixed(1)}
-                                        %)
-
-                                    </p>
-
-                                </div>
+                                <p className="text-xs text-gray-400">
+                                    顧客
+                                </p>
 
                             </div>
 
                         </div>
 
+                        {/* 凡例 */}
+                        <div className="space-y-5">
 
+                            <div>
 
+                                <div className="flex items-center gap-2">
 
+                                    <div className="w-3 h-3 rounded-full bg-blue-500" />
+
+                                    <span className="font-medium text-sm">
+                                        新規
+                                    </span>
+
+                                </div>
+
+                                <p className="ml-5 text-sm text-gray-600">
+
+                                    {dashboard?.new}人
+
+                                    {" "}
+
+                                    (
+                                    {(
+                                        (
+                                            dashboard?.new /
+                                            dashboard?.total
+                                        ) * 100
+                                    ).toFixed(1)}
+                                    %)
+
+                                </p>
+
+                            </div>
+
+                            <div>
+
+                                <div className="flex items-center gap-2">
+
+                                    <div className="w-3 h-3 rounded-full bg-yellow-500" />
+
+                                    <span className="font-medium text-sm">
+                                        対応中
+                                    </span>
+
+                                </div>
+
+                                <p className="ml-5 text-sm text-gray-600">
+
+                                    {dashboard?.in_progress}人
+
+                                    {" "}
+
+                                    (
+                                    {(
+                                        (
+                                            dashboard?.in_progress /
+                                            dashboard?.total
+                                        ) * 100
+                                    ).toFixed(1)}
+                                    %)
+
+                                </p>
+
+                            </div>
+
+                            <div>
+
+                                <div className="flex items-center gap-2">
+
+                                    <div className="w-3 h-3 rounded-full bg-green-500" />
+
+                                    <span className="font-medium text-sm">
+                                        成約
+                                    </span>
+
+                                </div>
+
+                                <p className="ml-5 text-sm text-gray-600">
+
+                                    {dashboard?.closed}人
+
+                                    {" "}
+
+                                    (
+                                    {(
+                                        (
+                                            dashboard?.closed /
+                                            dashboard?.total
+                                        ) * 100
+                                    ).toFixed(1)}
+                                    %)
+
+                                </p>
+
+                            </div>
+
+                        </div>
 
                     </div>
 
+
+
+
+
                 </div>
-            </main>
-        </div>
+
+            </div>
+        </main>
+
     )
 }

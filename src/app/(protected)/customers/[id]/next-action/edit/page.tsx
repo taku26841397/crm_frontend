@@ -62,13 +62,12 @@ export default function NextActionEditPage() {
     };
 
     return (
-        <div className="flex min-h-screen bg-slate-50">
-            <Sidebar />
-            <div className="flex-1">
-                <div className="max-w-2xl mx-auto p-6">
-                    <Link
-                        href={`/customers/${edit_id}`}
-                        className="inline-flex
+
+        <div className="flex-1">
+            <div className="max-w-2xl mx-auto p-6">
+                <Link
+                    href={`/customers/${edit_id}`}
+                    className="inline-flex
                                     items-center
                                     gap-2
 
@@ -93,49 +92,49 @@ export default function NextActionEditPage() {
                                     transition-all
                                     duration-200
                                     mb-4"
-                    >
+                >
 
-                        ←顧客詳細に戻る
-                    </Link>
-                    <h1 className="text-3xl font-bold mb-6">
-                        次回アクション追加
-                    </h1>
+                    ←顧客詳細に戻る
+                </Link>
+                <h1 className="text-3xl font-bold mb-6">
+                    次回アクション追加
+                </h1>
 
-                    <div className="bg-white rounded-xl shadow-md p-6">
-                        <div className="mb-4">
-                            <label className="block text-sm text-gray-500 mb-2">
-                                次回アクション
-                            </label>
+                <div className="bg-white rounded-xl shadow-md p-6">
+                    <div className="mb-4">
+                        <label className="block text-sm text-gray-500 mb-2">
+                            次回アクション
+                        </label>
 
-                            <input
-                                type="text"
-                                value={nextAction}
-                                onChange={(e) => setNextAction(e.target.value)}
-                                className="w-full border p-2 rounded"
-                            />
-                        </div>
-
-                        <div className="mb-6">
-                            <label className="block text-sm text-gray-500 mb-2">
-                                実施予定日
-                            </label>
-
-                            <input
-                                type="date"
-                                value={nextActionDate}
-                                onChange={(e) => setNextActionDate(e.target.value)}
-                                className="w-full border p-2 rounded"
-                            />
-                        </div>
-                        <button
-                            onClick={handleSubmit}
-                            className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition"
-                        >
-                            保存
-                        </button>
+                        <input
+                            type="text"
+                            value={nextAction}
+                            onChange={(e) => setNextAction(e.target.value)}
+                            className="w-full border p-2 rounded"
+                        />
                     </div>
+
+                    <div className="mb-6">
+                        <label className="block text-sm text-gray-500 mb-2">
+                            実施予定日
+                        </label>
+
+                        <input
+                            type="date"
+                            value={nextActionDate}
+                            onChange={(e) => setNextActionDate(e.target.value)}
+                            className="w-full border p-2 rounded"
+                        />
+                    </div>
+                    <button
+                        onClick={handleSubmit}
+                        className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition"
+                    >
+                        保存
+                    </button>
                 </div>
             </div>
         </div>
+
     )
 }

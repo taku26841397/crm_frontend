@@ -77,13 +77,12 @@ export default function CustomerEditPage() {
     };
 
     return (
-        <div className="flex min-h-screen bg-slate-50">
-            <Sidebar />
-            <div className="flex-1">
-                <div className="max-w-7xl mx-auto p-8">
-                    <Link
-                        href={`/customers/${id}`}
-                        className="inline-flex
+
+        <div className="flex-1">
+            <div className="max-w-7xl mx-auto p-8">
+                <Link
+                    href={`/customers/${id}`}
+                    className="inline-flex
                                     items-center
                                     gap-2
 
@@ -108,112 +107,112 @@ export default function CustomerEditPage() {
                                     transition-all
                                     duration-200
                                     mb-4"
-                    >
+                >
 
-                        ←顧客詳細に戻る
-                    </Link>
-                    <h1 className="text-3xl font-bold mb-6">
-                        顧客編集
-                    </h1>
-                    {/* {message && (
+                    ←顧客詳細に戻る
+                </Link>
+                <h1 className="text-3xl font-bold mb-6">
+                    顧客編集
+                </h1>
+                {/* {message && (
                     <p className="text-red-500">
                         {message}
                     </p>
                 )} */}
 
-                    <div className="grid grid-cols-2 gap-x-6 gap-y-8">
+                <div className="grid grid-cols-2 gap-x-6 gap-y-8">
 
-                        <div>
-                            <label>顧客名</label>
+                    <div>
+                        <label>顧客名</label>
 
-                            <input
-                                type="text"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                                className="w-full border p-2 rounded bg-white"
-                            />
-                        </div>
-
-                        <div>
-                            <label>メールアドレス</label>
-
-                            <input
-                                type="email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                className="w-full border p-2 rounded bg-white"
-                            />
-                        </div>
-
-                        <div>
-                            <label>会社名</label>
-
-                            <input
-                                type="text"
-                                value={company}
-                                onChange={(e) => setCompany(e.target.value)}
-                                className="w-full border p-2 rounded bg-white"
-                            />
-                        </div>
-
-                        <div>
-                            <label>住所</label>
-
-                            <input
-                                type="text"
-                                value={address}
-                                onChange={(e) => setAddress(e.target.value)}
-                                className="w-full border p-2 rounded bg-white"
-                            />
-                        </div>
-
-                        <div>
-                            <label>ステータス</label>
-
-                            <select
-                                value={status}
-                                onChange={(e) => setStatus(e.target.value)}
-                                className="w-full border p-2 rounded bg-white"
-                            >
-                                <option value="new">新規</option>
-                                <option value="in_progress">対応中</option>
-                                <option value="closed">成約</option>
-                            </select>
-                        </div>
-                        <div className="row-span-2">
-                            <label>メモ</label>
-
-                            <textarea
-
-                                value={memo}
-                                onChange={(e) => setMemo(e.target.value)}
-                                className=" w-full h-40 border p-2 rounded bg-white"
-                            />
-                        </div>
-                        <div>
-                            <label>電話番号</label>
-
-                            <input
-                                type="tel"
-                                value={phone}
-                                onChange={(e) => setPhone(e.target.value)}
-                                className="w-full border p-2 rounded bg-white"
-                            />
-                        </div>
-
-
-
-
-
+                        <input
+                            type="text"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            className="w-full border p-2 rounded bg-white"
+                        />
                     </div>
-                    <button
-                        className="bg-blue-600 text-white px-4 py-2 rounded"
-                        onClick={handleUpdate}
-                    >
-                        更新
-                    </button>
+
+                    <div>
+                        <label>メールアドレス</label>
+
+                        <input
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            className="w-full border p-2 rounded bg-white"
+                        />
+                    </div>
+
+                    <div>
+                        <label>会社名</label>
+
+                        <input
+                            type="text"
+                            value={company}
+                            onChange={(e) => setCompany(e.target.value)}
+                            className="w-full border p-2 rounded bg-white"
+                        />
+                    </div>
+
+                    <div>
+                        <label>住所</label>
+
+                        <input
+                            type="text"
+                            value={address}
+                            onChange={(e) => setAddress(e.target.value)}
+                            className="w-full border p-2 rounded bg-white"
+                        />
+                    </div>
+
+                    <div>
+                        <label>ステータス</label>
+
+                        <select
+                            value={status}
+                            onChange={(e) => setStatus(e.target.value)}
+                            className="w-full border p-2 rounded bg-white"
+                        >
+                            <option value="new">新規</option>
+                            <option value="in_progress">対応中</option>
+                            <option value="closed">成約</option>
+                        </select>
+                    </div>
+                    <div className="row-span-2">
+                        <label>メモ</label>
+
+                        <textarea
+
+                            value={memo}
+                            onChange={(e) => setMemo(e.target.value)}
+                            className=" w-full h-40 border p-2 rounded bg-white"
+                        />
+                    </div>
+                    <div>
+                        <label>電話番号</label>
+
+                        <input
+                            type="tel"
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
+                            className="w-full border p-2 rounded bg-white"
+                        />
+                    </div>
+
+
+
+
+
                 </div>
+                <button
+                    className="bg-blue-600 text-white px-4 py-2 rounded"
+                    onClick={handleUpdate}
+                >
+                    更新
+                </button>
             </div>
         </div>
+
     );
 }

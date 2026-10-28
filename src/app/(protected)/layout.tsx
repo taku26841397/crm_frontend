@@ -3,6 +3,8 @@
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
+import Sidebar from "@/src/components/Sidebar";
+
 export default function ProtectedLayout({
     children,
 }: {
@@ -19,5 +21,15 @@ export default function ProtectedLayout({
         }
     }, [router]);
 
-    return <>{children}</>;
+    return (
+        <div className="min-h-screen bg-slate-50">
+            <Sidebar />
+
+
+            <div className="md:ml-56">
+                {children}
+            </div>
+
+        </div>
+    );
 }

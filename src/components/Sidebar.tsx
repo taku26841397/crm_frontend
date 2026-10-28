@@ -82,7 +82,7 @@ export default function Sidebar() {
             <aside
                 className={`
                     fixed
-                    md:relative
+                    
                     z-50
 
                     top-0
@@ -281,7 +281,7 @@ export default function Sidebar() {
                         <div>
 
                             <p className="text-sm font-medium">
-                                田鎖 透
+                                admin
                             </p>
 
                             <p className="text-xs text-slate-400">
