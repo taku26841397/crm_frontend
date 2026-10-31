@@ -13,10 +13,31 @@ import {
     X,
 } from "lucide-react";
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useAuthGuard } from "../app/hooks/useAuthGuard";
+import { authHeaders } from "../lib/api";
+
+
+const fetchMe = async () => {
+    const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/me/`,
+        {
+            headers: authHeaders(),
+        }
+    );
+    console.log(res.status)
+    return res.json();
+};
+
 
 export default function Sidebar() {
 
     const [isOpen, setIsOpen] = useState(false);
+    const { data: me } = useQuery({
+        queryKey: ["me"],
+        queryFn: fetchMe,
+    });
+    console.log(me);
 
     return (
         <>
@@ -253,46 +274,77 @@ export default function Sidebar() {
                 {/* =========================
                     プロフィール
                 ========================= */}
-                <div className="
-                    absolute
-                    bottom-4
-                    left-4
-                    right-4
-                    border-t
-                    border-slate-700
-                    pt-4
-                ">
+                <Link
+                    href="/settings/profile"
+                    className="
+        absolute
+        bottom-4
+        left-4
+        right-4
+        border-t
+        border-slate-700
+        pt-4
+
+        hover:bg-slate-800
+        rounded-lg
+        transition
+    "
+                >
 
                     <div className="flex items-center gap-3">
 
-                        <div className="
-                            w-10
-                            h-10
-                            rounded-full
-                            bg-slate-600
-                            flex
-                            items-center
-                            justify-center
-                            font-bold
-                        ">
-                            田
+                        <div
+                            className="
+        w-10
+        h-10
+        rounded-full
+        overflow-hidden
+        bg-slate-600
+
+        flex
+        items-center
+        justify-center
+
+        text-white
+        font-bold
+    "
+                        >
+                            {me?.profile_image ? (<img
+                                src={
+                                    me?.profile_image
+                                }
+                                alt="profile"
+                                className="
+            w-full
+            h-full
+            object-cover
+        "
+                            />) : (<span
+                                className="
+                text-white
+                text-sm
+                font-bold
+            "
+                            >
+                                {me?.username?.charAt(0)?.toUpperCase() ?? "?"}
+                            </span>)}
                         </div>
 
                         <div>
 
                             <p className="text-sm font-medium">
-                                admin
+                                {me?.username ?? "Loading..."}
                             </p>
 
                             <p className="text-xs text-slate-400">
-                                admin@example.com
+                                {me?.email ?? ""}
                             </p>
 
                         </div>
 
                     </div>
 
-                </div>
+                </Link>
 
             </aside>
         </>
